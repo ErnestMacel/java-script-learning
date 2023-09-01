@@ -102,16 +102,17 @@ document.querySelectorAll(".js-add-to-cart-button").forEach((button) => {
   });
 });
 function addToCart(product) {
-  const result = [];
+  let result ;
   cart.forEach((value) => {
-    value.name === product && result.push(product);
+    value.name === product && (result=value);
   });
-  if (!result.length) {
-    console.log("hoo");
+  if (!result) {
     cart.push({
       name: product,
       quantity: 1,
     });
-  } 
+  } else{
+    result.quantity++
+  }
   console.log(cart);
 }
