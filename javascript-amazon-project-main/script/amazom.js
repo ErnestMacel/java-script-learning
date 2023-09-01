@@ -1,46 +1,7 @@
-// const products = [
-//   {
-//     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
-//     name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
-//     rating: {
-//       stars: 45,
-//       count: 87,
-//     },
-//     priceCents: 1090,
-//   },
-//   {
-//     image: "images/products/intermediate-composite-basketball.jpg",
-//     name: "Intermediate Size Basketball",
-//     rating: {
-//       stars: 40,
-//       count: 127,
-//     },
-//     priceCents: 2095,
-//   },
-//   {
-//     image: "images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg",
-//     name: "Adults Plain Cotton T-Shirt - 2 Pack",
-//     rating: {
-//       stars: 45,
-//       count: 56,
-//     },
-//     priceCents: 799,
-//   },
-//   {
-//     image: "images/products/black-2-slot-toaster.jpg",
-//     name: "2 Slot Toaster - Black",
-//     rating:{
-//       stars:50,
-//       count:2197
-//     },
-//     priceCents:1899
-//   },
-// ];
-function generatePage() {
-  const grid = document.querySelector(".products-grid");
-  let items = "";
-  products.forEach((product) => {
-    items += ` <div class="product-container">
+const grid = document.querySelector(".products-grid");
+let items = "";
+products.forEach((product) => {
+  items += ` <div class="product-container">
             <div class="product-image-container">
                 <img class="product-image"
                 src="${product.image}">
@@ -63,7 +24,7 @@ function generatePage() {
             </div>
 
             <div class="product-quantity-container">
-                <select>
+                <select class="js-select-quantity-${product.id}">
                 <option selected value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -90,10 +51,10 @@ function generatePage() {
                 Add to Cart
             </button>
             </div>`;
-  });
-  grid.innerHTML = items;
-  totalQuantity();
-}
+});
+grid.innerHTML = items;
+totalQuantity();
+
 generatePage();
 
 document.querySelectorAll(".js-add-to-cart-button").forEach((button) => {
@@ -110,10 +71,14 @@ function addToCart(product) {
   if (!result) {
     cart.push({
       id: product,
-      quantity: 1,
+      quantity: Number(
+        document.querySelector(`.js-select-quantity-${product}`).value
+      ),
     });
   } else {
-    result.quantity++;
+    result.quantity = Number(
+      document.querySelector(`.js-select-quantity-${product}`).value
+    );
   }
   totalQuantity();
 }

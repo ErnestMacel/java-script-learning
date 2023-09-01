@@ -72,11 +72,13 @@ function addToCart(product) {
   if (!result) {
     cart.push({
       id: product,
-      quantity: document.querySelector(`js-quantity-selector-${product}`),
+      quantity: Number(
+        document.querySelector(`.js-quantity-selector-${product}`).value
+      ),
     });
   } else {
-    result.quantity += document.querySelector(
-      `js-quantity-selector-${product}`
+    result.quantity += Number(
+      document.querySelector(`.js-quantity-selector-${product}`).value
     );
   }
   totalQuantity();
@@ -88,5 +90,6 @@ function totalQuantity() {
   cart.forEach((value) => {
     totalCount += value.quantity;
   });
+  console.log(totalCount);
   document.querySelector(".cart-quantity").innerHTML = totalCount;
 }
