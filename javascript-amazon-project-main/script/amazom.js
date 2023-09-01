@@ -92,6 +92,7 @@ function generatePage() {
             </div>`;
   });
   grid.innerHTML = items;
+  totalQuantity();
 }
 generatePage();
 
@@ -102,17 +103,26 @@ document.querySelectorAll(".js-add-to-cart-button").forEach((button) => {
   });
 });
 function addToCart(product) {
-  let result ;
+  let result;
   cart.forEach((value) => {
-    value.id === product && (result=value);
+    value.id === product && (result = value);
   });
   if (!result) {
     cart.push({
       id: product,
       quantity: 1,
     });
-  } else{
-    result.quantity++
+  } else {
+    result.quantity++;
   }
-  console.log(cart);
+  totalQuantity();
+}
+
+function totalQuantity() {
+  let totalCount = 0;
+
+  cart.forEach((value) => {
+    totalCount += value.quantity;
+  });
+  document.querySelector(".cart-quantity").innerHTML = totalCount;
 }
