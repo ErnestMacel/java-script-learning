@@ -1,7 +1,10 @@
-const grid = document.querySelector(".products-grid");
-let items = "";
-products.forEach((product) => {
-  items += ` <div class="product-container">
+// time out for the buttons
+let timeOut;
+function generatePage() {
+  const grid = document.querySelector(".products-grid");
+  let items = "";
+  products.forEach((product) => {
+    items += ` <div class="product-container">
             <div class="product-image-container">
                 <img class="product-image"
                 src="${product.image}">
@@ -40,7 +43,7 @@ products.forEach((product) => {
 
             <div class="product-spacer"></div>
 
-            <div class="added-to-cart ">
+            <div class="added-to-cart added-to-cart-${product.id}">
                 <img src="images/icons/checkmark.png">
                 Added
             </div>
@@ -51,10 +54,10 @@ products.forEach((product) => {
                 Add to Cart
             </button>
             </div>`;
-});
-grid.innerHTML = items;
-totalQuantity();
-
+  });
+  grid.innerHTML = items;
+  totalQuantity();
+}
 generatePage();
 
 document.querySelectorAll(".js-add-to-cart-button").forEach((button) => {
@@ -76,11 +79,24 @@ function addToCart(product) {
       ),
     });
   } else {
-    result.quantity = Number(
+    result.quantity += Number(
       document.querySelector(`.js-select-quantity-${product}`).value
     );
   }
   totalQuantity();
+  // added label above the button
+  document
+    .querySelector(`.added-to-cart-${product}`)
+    .classList.add("added-to-cart-done");
+  if (timeOut) {
+    clearTimeout(timeOut);
+  }
+
+   timeOut = setTimeout(() => {
+    document
+      .querySelector(`.added-to-cart-${product}`)
+      .classList.remove("added-to-cart-done");
+  }, 800);
 }
 
 function totalQuantity() {
