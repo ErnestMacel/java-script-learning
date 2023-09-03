@@ -1,5 +1,5 @@
-import { cart } from "../date/cart.js";
-import { products } from "../data/products";
+import { cart } from "../data/cart.js";
+import { products } from "../data/products.js";
 // time out for the buttons
 let timeOut;
 function generatePage() {
