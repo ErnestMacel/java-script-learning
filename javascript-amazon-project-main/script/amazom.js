@@ -1,3 +1,4 @@
+import {cart} from '..date/cart.js' ;
 // time out for the buttons
 let timeOut;
 function generatePage() {
