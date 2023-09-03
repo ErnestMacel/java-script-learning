@@ -1,4 +1,5 @@
-import {cart} from '..date/cart.js' ;
+import { cart } from "..date/cart.js";
+import { products } from "../data/products";
 // time out for the buttons
 let timeOut;
 function generatePage() {
@@ -93,7 +94,7 @@ function addToCart(product) {
     clearTimeout(timeOut);
   }
 
-   timeOut = setTimeout(() => {
+  timeOut = setTimeout(() => {
     document
       .querySelector(`.added-to-cart-${product}`)
       .classList.remove("added-to-cart-done");
