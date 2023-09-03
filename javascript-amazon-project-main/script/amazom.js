@@ -1,4 +1,4 @@
-import { cart } from "..date/cart.js";
+import { cart } from "../date/cart.js";
 import { products } from "../data/products";
 // time out for the buttons
 let timeOut;
