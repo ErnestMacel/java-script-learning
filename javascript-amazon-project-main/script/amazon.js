@@ -1,5 +1,6 @@
 import { cart } from "../data/cart.js";
 import { products } from "../data/products.js";
+import { converCurrency } from "./money.js";
 // time out for the buttons
 let timeOut;
 function generatePage() {
@@ -25,7 +26,7 @@ function generatePage() {
             </div>
 
             <div class="product-price">
-                $${(product.priceCents / 100).toFixed(2)}
+                $${converCurrency(product.priceCents)}
             </div>
 
             <div class="product-quantity-container">
