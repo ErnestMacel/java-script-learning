@@ -4,13 +4,16 @@ import { converCurrency } from "./money.js";
 
 generateCart();
 function generateCart() {
+  document.querySelector(".order-summary").innerHTML;
   cart.forEach((cartProduct) => {
     let matchingProduct;
     products.forEach((databaseProduct) => {
       databaseProduct.id === cartProduct.id &&
         (matchingProduct = databaseProduct);
     });
-    const generatedHTML = `<div class="cart-item-container">
+    const generatedHTML = `<div class="cart-item-container cart-item-${
+      cartProduct.id
+    }" >
   <div class="delivery-date">
     Delivery date: Wednesday, June 15
   </div>
@@ -32,7 +35,9 @@ function generateCart() {
         <span class="update-quantity-link link-primary">
           Update
         </span>
-        <span class="delete-quantity-link link-primary">
+        <span class="delete-quantity-link link-primary js-delete-button" data-product-id ="${
+          cartProduct.id
+        }">
           Delete
         </span>
       </div>
@@ -89,3 +94,21 @@ function generateCart() {
     document.querySelector(".order-summary").innerHTML += generatedHTML;
   });
 }
+function deleteFromCart(itemId) {
+  document.querySelector(`.cart-item-${itemId}`).remove();
+  cart.forEach((item) => {
+    if (item.id === itemId) {
+      cart.splice(item);
+    }
+  });
+  generateCart();
+}
+document.querySelectorAll('.js-delete-button').forEach(
+  (button)=>{
+  button.addEventListener('click',()=>{
+    const product_ID =button.dataset.productId;
+    deleteFromCart(product_ID)
+  }
+  )
+  }
+)
